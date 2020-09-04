@@ -1,0 +1,2 @@
+A classe Page serve como base para praticamente todas as páginas criadas.
+Porque a parte do header e footer são carregados pelos métodos construtores e destrutores.
