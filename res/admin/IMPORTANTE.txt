@@ -1,0 +1,5 @@
+starter.html contém o esqueleto do layout da página do administrador
+
+Através dele identificamos o que faz parte do header, footer e conteúdo (index).
+
+Após identificar essas partes, copie cada uma e cole nos arquivos header, footer e index em "criandoecommerce > views > admin"

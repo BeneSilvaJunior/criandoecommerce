@@ -1,0 +1,1 @@
+A pasta "admin" armazena o template do layout do admin e a pasta "site", o template do layout do site.

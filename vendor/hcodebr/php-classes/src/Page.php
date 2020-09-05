@@ -17,15 +17,15 @@ class Page {
 
  //Método mágico - primeiro a ser carregado
  
- /* Passamos as opções "$opts = array" (por padrão é um array). 
+ /* Passamos as opções "$opts = array" (por padrão é um array) e "$tpl_dir" (diretório das views) - por padrão é "/views/")
  Mas podemos ter algumas opções padrão (default) "$defaults" (é um array) */
- public function __construct($opts = array()) {	 
+ public function __construct($opts = array(), $tpl_dir = "/views/") {	 
 	 
 	 $this->options = array_merge($this->defaults, $opts);
  
     // configuração do template
 	$config = array(
-		"tpl_dir"       => $_SERVER["DOCUMENT_ROOT"]."/views/", //pasta para pegar os templates
+		"tpl_dir"       => $_SERVER["DOCUMENT_ROOT"].$tpl_dir, //pasta para pegar os templates
 		"cache_dir"     => $_SERVER["DOCUMENT_ROOT"]."/views-cache/", //pasta com o cache HTML
 		"debug"         => false // set to false to improve the speed
 		

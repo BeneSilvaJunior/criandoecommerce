@@ -1,0 +1,5 @@
+Na raiz desta pasta (views) estão os arquivos que estruturam o site que é apresentado ao usuário. Já na pasta "admin", estruturam a parte do site onde apenas os administradores têm acesso para administrar o site.
+
+Header: parte de cima
+Footer: rodapé
+Index: conteúdo das páginas

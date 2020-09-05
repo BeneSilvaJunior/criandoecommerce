@@ -1,2 +1,6 @@
 A classe Page serve como base para praticamente todas as páginas criadas.
 Porque a parte do header e footer são carregados pelos métodos construtores e destrutores.
+
+Existem as classes Page e PageAdmin. A classe Page cuida das páginas do site e a classe PageAdmin, das páginas do gerenciador (admin).
+
+É importante ter as duas classes para separar os layouts do site e do admin, e evitar conflitos de nomes de arquivos iguais.
