@@ -10,9 +10,12 @@ class Page {
 	private $tpl;
 	private $options = [];
 	
-	//Passamos as variáveis para o template (é um array vazio por padrão)
+	//Por padrão, header e footer são true. Passamos as variáveis para o template (é um array vazio por padrão)
 	private $defaults = [
+		"header"=>true,
+		"footer"=>true,
 		"data"=>[]
+	
 	];
 
  //Método mágico - primeiro a ser carregado
@@ -43,7 +46,9 @@ class Page {
 	Assim passamos os dados para a classe Page. Para isso recebemos algumas opções da classe */
 	$this->setData($this->options["data"]);
 	
-	$this->tpl->draw("header");
+	
+	//Se header for true (todo site exceto página de login)
+	if($this->options["header"] === true) $this->tpl->draw("header");
  
  }
  
@@ -66,8 +71,9 @@ class Page {
  
  //Metodo destrutor - último a ser carregado
  public function __destruct() {
-	 
- $this->tpl->draw("footer");
+
+ //Se footer for true (todo site exceto página de login)	 
+ if($this->options["footer"] === true) $this->tpl->draw("footer");
  
  }
 
