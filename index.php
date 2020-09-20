@@ -66,6 +66,99 @@ $app->get('/admin/login', function() {
 	 header("Location: /admin/login");
 	 exit;
  });
+ 
+ //Rota para consulta de usuários
+ $app->get("/admin/users", function() {
+	 
+	 //Verifica se o usuário está logado e se tem acesso ao administrativo
+	 User::verifyLogin();
+	 
+	 $users = User::listAll(); //lista usuários
+ 
+ 	$page = new PageAdmin();	
+	$page->setTpl("users", array(
+		"users"=>$users
+	 ));
+ });
+
+ //-----   Rotas de telas
+
+ //Rota para criação de usuários
+ $app->get("/admin/users/create", function() {
+	 
+	 User::verifyLogin();
+ 
+ 	$page = new PageAdmin();	
+	$page->setTpl("users-create");
+ });
+ 
+ /* Obs.: manter a rota  ...iduser/delete antes de ..iduser para que a rota /delete seja lida*/ 
+ 
+   //Exclui usuários
+ $app->get("/admin/users/:iduser/delete", function($iduser) {
+	 User::verifyLogin();
+ }); 
+ 
+ //Rota para atualização de usuários
+ $app->get("/admin/users/:iduser", function($iduser) {
+	 
+	 User::verifyLogin();
+ 
+ 	$page = new PageAdmin();	
+	$page->setTpl("users-update");
+ });
+ 
+  //Rota para atualização de usuários
+ $app->get("/admin/users/:iduser", function($iduser) {
+	 
+	 User::verifyLogin();
+ 
+ 	$page = new PageAdmin();	
+	$page->setTpl("users-update");
+ });
+
+ //Faz o insert no banco
+ $app->post("/admin/users/create", function() {
+	 User::verifyLogin();
+	 
+	 $user = new User();
+	 
+	 //Verifica se inadmin foi definido, o valor é 1, senão é 0
+	 $_POST["inadmin"] = (isset($_POST["inadmin"]))?1:0;
+	 
+	 $user->setData($_POST);
+	 $user->save();
+	 
+	 header("Location: /admin/users");
+	 exit;
+ });
+ 
+ 
+ /*
+ $app->post("/admin/users/create", function () {
+
+ 	User::verifyLogin();
+
+	$user = new User();
+
+ 	$_POST["inadmin"] = (isset($_POST["inadmin"])) ? 1 : 0;
+
+ 	$_POST['despassword'] = password_hash($_POST["despassword"], PASSWORD_DEFAULT, ["cost"=>12
+ 	]);
+
+ 	$user->setData($_POST);
+	$user->save();
+
+	header("Location: /admin/users");
+ 	exit;
+
+});
+*/
+  //Salva as edições
+ $app->post("/admin/users/:iduser", function($iduser) {
+	 User::verifyLogin();
+ });
+
 
 $app->run();
 

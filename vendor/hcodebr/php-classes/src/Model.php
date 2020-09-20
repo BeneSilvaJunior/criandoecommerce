@@ -26,7 +26,7 @@ class Model {
    		return $this->values[$fieldName];
 	break;
 	case "set": //se set, atribui o valor de args[0] para o nome do campo
-		$this->values[$fieldName] = args[0];
+		$this->values[$fieldName] = $args[0];
 	break;
    }
  }

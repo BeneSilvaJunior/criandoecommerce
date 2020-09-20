@@ -72,6 +72,32 @@
 	  $_SESSION[User::SESSION] = NULL;
   }
   
+  //Lê todos os dados da tabela
+  public static function listAll()
+  {
+	  $sql = new Sql();
+	  
+	  return $sql->select("SELECT * FROM tb_users a INNER JOIN tb_persons b USING(idperson) ORDER BY b.desperson");
+  }
+  
+  //Método para salvar no banco
+  public function save()
+  {
+	  $sql = new Sql();
+	  
+	  $sql->select("CALL sp_users_save(:desperson, :deslogin, :despassword, :desmail, :nrphone, :inadmin)", 
+	  array(
+	  ":desperson"=>$this->getdesperson(),
+	  ":deslogin"=>$this->getdeslogin(),
+	  ":despassword"=>$this->getdespassword(),
+	  ":desemail"=>$this->getdesmail(),
+	  ":nrphone"=>$this->getnrphone(),
+	  ":inadmin"=>$this->getinadmin()
+	  ));
+	  
+	  $this->setData($results[0]);
+  }
+  
  }
  
 ?>
