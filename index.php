@@ -68,17 +68,17 @@ $app->get('/admin/login', function() {
  });
  
  //Rota para consulta de usuários
- $app->get("/admin/users", function() {
+ $app->get("/admin/users", function() { 
 	 
-	 //Verifica se o usuário está logado e se tem acesso ao administrativo
-	 User::verifyLogin();
+	//Verifica se o usuário está logado e se tem acesso ao administrativo
+	User::verifyLogin();
 	 
-	 $users = User::listAll(); //lista usuários
+    $users = User::listAll(); //lista usuários
  
  	$page = new PageAdmin();	
 	$page->setTpl("users", array(
 		"users"=>$users
-	 ));
+	 )); 
  });
 
  //-----   Rotas de telas
@@ -157,6 +157,15 @@ $app->get('/admin/login', function() {
   //Salva as edições
  $app->post("/admin/users/:iduser", function($iduser) {
 	 User::verifyLogin();
+	 
+	 $user = new User();
+	 $_POST["inadmin"] = (isset($_POST["inadmin"])) ? 1 : 0;
+	 $user->get((int)$iduser);
+	 $user->setData($_POST);
+	 $user->update();
+	 header("Location: /admin/users");
+	 exit;
+	 
  });
 
 

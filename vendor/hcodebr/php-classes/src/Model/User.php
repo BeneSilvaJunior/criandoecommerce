@@ -51,12 +51,15 @@
   //Verifica se está logado
   public static function verifyLogin($inadmin = true)
   {
+	  //var_dump($_SESSION[User::SESSION]);
+	  //exit;
+	  
 	  if (
 	  	!isset($_SESSION[User::SESSION]) //Se a sessão não for definida...
 		|| //Ou ...
 		!$_SESSION[User::SESSION] //Se for falsa (vazia)...
 		||
-		(int)$_SESSION[User::SESSION]["iduser"] > 0 //Se o ID do usuário for maior do que zero (se for um usuário)... 
+		!(int)$_SESSION[User::SESSION]["iduser"] > 0 //Se o ID do usuário for maior do que zero (se for um usuário)... 
 		||
 		(bool)$_SESSION[User::SESSION]["inadmin"] !== $inadmin //Verifica se o usuário pode acessar a administração (= true)...
 		
@@ -85,12 +88,12 @@
   {
 	  $sql = new Sql();
 	  
-	  $sql->select("CALL sp_users_save(:desperson, :deslogin, :despassword, :desmail, :nrphone, :inadmin)", 
+	  $results = $sql->select("CALL sp_users_save(:desperson, :deslogin, :despassword, :desemail, :nrphone, :inadmin)", 
 	  array(
 	  ":desperson"=>$this->getdesperson(),
 	  ":deslogin"=>$this->getdeslogin(),
 	  ":despassword"=>$this->getdespassword(),
-	  ":desemail"=>$this->getdesmail(),
+	  ":desemail"=>$this->getdesemail(),
 	  ":nrphone"=>$this->getnrphone(),
 	  ":inadmin"=>$this->getinadmin()
 	  ));
